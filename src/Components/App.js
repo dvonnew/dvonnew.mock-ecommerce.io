@@ -34,19 +34,15 @@ const App = () => {
     }
 
     const addToCart = (cartItemDetail) => {
-        if (cart.length !== 0 ) {
-            cart.find((item, i) => {
-                if(item.item.id === cartItemDetail.item.id){
-                    console.log('------item already in cart------')
-                    addCartQuantity(i, item, cartItemDetail)
-                } else {
-                    console.log('------need to add item------')
-                }
-            })
-
-        } else{
-        const newCartItem = [...cart, cartItemDetail]
-        setCart(newCartItem)
+        if (cart.find(item => item.item.id === cartItemDetail.item.id)){
+                cart.find((item, i) => {
+                    if (item.item.id === cartItemDetail.item.id){
+                        addCartQuantity(i, item, cartItemDetail)
+                    }
+                })
+            } else{
+            const newCartItem = [...cart, cartItemDetail]
+            setCart(newCartItem)
         }
     }
 

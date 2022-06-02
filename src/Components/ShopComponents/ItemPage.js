@@ -8,7 +8,7 @@ const Item = (props) => {
 
     const initialItemDetail = {
         item: {},
-        amount: 1,
+        amount: 0,
         total: 0,
     }
 
@@ -22,7 +22,7 @@ const Item = (props) => {
         const data = await fetch(`https://fakestoreapi.com/products/${params.id}`)
 
         const item = await data.json()
-        setCartItemDetail((prevState) => ({...prevState, 'item': item }))
+        setCartItemDetail((prevState) => ({...prevState, 'item': item}))
     }
 
     const onQuantityChange = (value) => {
@@ -32,7 +32,6 @@ const Item = (props) => {
 
     const addToCart = (e) => {
         e.preventDefault()
-        console.log(cartItemDetail.amount)
         props.addToCart(cartItemDetail)
     }
 
