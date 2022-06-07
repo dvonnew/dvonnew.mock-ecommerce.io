@@ -11,6 +11,28 @@ nav {
   color: white;
 }
 
+.dropdown {
+  height: 100%;
+  position: relative;
+}
+
+.dropdown-content {
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  list-style: none;
+}
+
+.log-button {
+  border: none;
+  font-size: 14px;
+}
+
 p{
   margin-top: 5px;
 }
@@ -70,6 +92,7 @@ a{
 }
 
 .nav-links {
+  height: 100%;
   width: 50%;
   display: flex;
   justify-content: space-around;

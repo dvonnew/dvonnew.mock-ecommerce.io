@@ -1,11 +1,13 @@
 import React, {useState, useEffect}  from 'react'
 import '../App.css'
-import Nav from './Nav'
+import Nav from './NavComponents/Nav'
 import Home from './HomeComponents/HomePage'
 import Shop from './ShopComponents/ShopPage'
 import Cart from './CartComponents/ShoppingCart'
 import Item from './ShopComponents/ItemPage'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { db, signIn, signOutUser } from '../firebase'
+// import { collection, addDoc, Timestamp } from 'firebase/firestore'
 
 const App = () => {
 
@@ -60,7 +62,7 @@ const App = () => {
         <>
             <Router>
                 <div>
-                    <Nav />
+                    <Nav signIn={signIn} signOut={signOutUser}/>
                     <Routes>
                         <Route path="/home" element={<Home />} />
                         <Route path="/shop" exact element={<Shop />} />

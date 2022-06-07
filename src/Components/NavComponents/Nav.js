@@ -1,12 +1,13 @@
 import React from 'react'
-import '../App.css'
 import { Link } from 'react-router-dom'
+import DropDown from './UserDropdown'
 
-const Nav = () => {
+const Nav = (props) => {
     
     const navStyle = {
         color: 'white'
     }
+
     return(
         <nav>
             <h1>Online Store</h1>
@@ -20,6 +21,9 @@ const Nav = () => {
                 <Link style={navStyle} to='/cart'>
                     <li>Cart</li>
                 </Link>
+                <li>
+                    <DropDown signIn={props.signIn} signOut={props.signOut}/>
+                </li>
             </ul>
         </nav>
     )
