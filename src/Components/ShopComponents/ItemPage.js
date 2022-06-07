@@ -46,7 +46,7 @@ const Item = (props) => {
                         <p>{item.rating.count} ratings</p> */}
                     </div>
                     <div className='buy-box'>
-                        <p>${cartItemDetail.item.price}</p>
+                        <p>${cartItemDetail.item.price.toFixed(2)}</p>
                         <form>
                             <AlterQuantity onQuantityChange={onQuantityChange} quantity={cartItemDetail.amount} />
                             <button onClick={addToCart}>Add to Cart</button>

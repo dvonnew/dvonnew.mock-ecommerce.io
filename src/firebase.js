@@ -1,5 +1,12 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore"
+import { 
+    getFirestore,
+    query,
+    getDocs,
+    collection,
+    where,
+    addDoc
+ } from "firebase/firestore"
 import {
     getAuth,
     onAuthStateChanged,
@@ -19,12 +26,27 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const auth = getAuth(app)
 const db = getFirestore(app)
 
+
+// User Sig-in and Sign-out
 async function signIn() {
     let provider = new GoogleAuthProvider()
     try {
-        await signInWithPopup(getAuth(), provider)
+        const res = await signInWithPopup(getAuth(), provider)
+        const user = res.user
+        const q = query(collection(db, "users"), where("uid", "==", user.uid))
+        const docs = await getDocs(q)
+        if (docs.docs.length === 0) {
+            await addDoc(collection(db, "users"), {
+                uid: user.uid,
+                name: user.displayName,
+                authProvider: "google",
+                email: user.email,
+                picture: user.photoURL
+            })
+        }
     } catch (err) {
         console.error(err)
     }
@@ -34,12 +56,13 @@ function signOutUser() {
     signOut(getAuth())
 }
 
-function initFirebaseAuth() {
-    onAuthStateChanged(getAuth())
-}
-
 function isUserSignedIn() {
     return !!getAuth().currentUser;
 }
 
-export { db, signIn, signOutUser, isUserSignedIn }
+// Fetching User Related Data
+
+
+// Cart Storage
+
+export { db, auth, signIn, signOutUser, isUserSignedIn }

@@ -17,7 +17,7 @@ const ItemDisplay = (props) => {
                 </div>
                 <div className='item-detail'>
                     <p>{item.title}</p>
-                    <p>${item.price}</p>
+                    <p>${item.price.toFixed(2)}</p>
                 </div>
             </div>
         </Link>

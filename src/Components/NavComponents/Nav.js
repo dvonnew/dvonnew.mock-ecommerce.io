@@ -4,6 +4,7 @@ import DropDown from './UserDropdown'
 
 const Nav = (props) => {
     
+    const { user } = props
     const navStyle = {
         color: 'white'
     }
@@ -12,7 +13,7 @@ const Nav = (props) => {
         <nav>
             <h1>Online Store</h1>
             <ul className='nav-links'>
-                <Link style={navStyle} to='/home'>
+                <Link style={navStyle} to='/'>
                     <li>Home</li>
                 </Link>
                 <Link style={navStyle} to='/shop'>
@@ -22,7 +23,7 @@ const Nav = (props) => {
                     <li>Cart</li>
                 </Link>
                 <li>
-                    <DropDown signIn={props.signIn} signOut={props.signOut}/>
+                    <DropDown signIn={props.signIn} signOut={props.signOut} user={user}/>
                 </li>
             </ul>
         </nav>

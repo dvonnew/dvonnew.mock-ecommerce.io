@@ -5,17 +5,27 @@ import Home from './HomeComponents/HomePage'
 import Shop from './ShopComponents/ShopPage'
 import Cart from './CartComponents/ShoppingCart'
 import Item from './ShopComponents/ItemPage'
+import Profile from './UserProfileComponents/Profile'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { db, signIn, signOutUser } from '../firebase'
+import { db, auth, signIn, signOutUser } from '../firebase'
+import { useAuthState } from 'react-firebase-hooks/auth'
 // import { collection, addDoc, Timestamp } from 'firebase/firestore'
 
 const App = () => {
 
     const [cart, setCart] = useState([])
+    const [user, login, error] = useAuthState(auth)
 
     useEffect(() => {
         console.log(cart)
     }, [cart])
+
+    useEffect(() => {
+        if (!user) return
+        console.log(user)
+    }, [user])
+
+    //Cart Related
 
     const addCartQuantity = (i, item, updatedItem) => {
         const newAmount = updatedItem.amount + item.amount
@@ -62,12 +72,13 @@ const App = () => {
         <>
             <Router>
                 <div>
-                    <Nav signIn={signIn} signOut={signOutUser}/>
+                    <Nav signIn={signIn} signOut={signOutUser} user={user}/>
                     <Routes>
-                        <Route path="/home" element={<Home />} />
+                        <Route path="/" exact element={<Home />} />
                         <Route path="/shop" exact element={<Shop />} />
                         <Route path="/cart"  element={<Cart cart={cart} deleteItem={deleteItem} onQuantityChange={onQuantityChange} />} />
                         <Route path="/shop/:id" element={<Item addToCart={addToCart} />} />
+                        <Route path="/profile" element={<Profile user={user}/>} />
                     </Routes>
                 </div>
             </Router>

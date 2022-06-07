@@ -24,7 +24,7 @@ const CartCard = (props) => {
                 </div>
             </div>
             <div className='cart-detail'>
-                <p>Total: ${item.total}</p>
+                <p>Total: ${item.total.toFixed(2)}</p>
                 <AlterCartQuantity quantity={item.amount} onQuantityChange={onQuantityChange} />
                 <Remove deleteItem={deleteItem}/>
             </div>

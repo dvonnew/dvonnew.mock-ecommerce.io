@@ -221,3 +221,8 @@ button{
   flex-direction: column;
   justify-content: center;
 }
+
+.user-info-box {
+  display: flex;
+  flex-direction: row;
+}
