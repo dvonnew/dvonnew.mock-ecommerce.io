@@ -1,40 +1,28 @@
-import { initializeApp } from "firebase/app";
+import { db, auth } from './firebase-config'
 import { 
-    getFirestore,
     query,
     getDocs,
     collection,
     where,
-    addDoc
+    addDoc,
+    updateDoc,
+    doc,
+    getDoc,
+    setDoc
  } from "firebase/firestore"
 import {
-    getAuth,
     onAuthStateChanged,
     GoogleAuthProvider,
     signInWithPopup,
     signOut,
   } from 'firebase/auth'
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBCsH8ViFKXgipMhmRSblfsxNb_sr6QPT8",
-  authDomain: "mock-ecommerce-3f451.firebaseapp.com",
-  projectId: "mock-ecommerce-3f451",
-  storageBucket: "mock-ecommerce-3f451.appspot.com",
-  messagingSenderId: "465926827357",
-  appId: "1:465926827357:web:2e08cf282f50964788ccb4"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app)
-const db = getFirestore(app)
-
 
 // User Sig-in and Sign-out
 async function signIn() {
     let provider = new GoogleAuthProvider()
     try {
-        const res = await signInWithPopup(getAuth(), provider)
+        const res = await signInWithPopup(auth, provider)
         const user = res.user
         const q = query(collection(db, "users"), where("uid", "==", user.uid))
         const docs = await getDocs(q)
@@ -53,16 +41,35 @@ async function signIn() {
 }
 
 function signOutUser() {
-    signOut(getAuth())
+    signOut(auth)
 }
 
 function isUserSignedIn() {
-    return !!getAuth().currentUser;
+    return !!auth.currentUser;
 }
-
-// Fetching User Related Data
-
 
 // Cart Storage
 
-export { db, auth, signIn, signOutUser, isUserSignedIn }
+async function saveCart(userID, cart) {
+    try{
+        cart.forEach(async function (item) {
+            const q = query(collection(db, "cartItems"), where("userID", "==", userID), where("item.id", "==", item.item.id))
+            const docs = await getDocs(q)
+            if (docs.docs.length === 0) {
+                await addDoc(collection(db, "cartItems"), {
+                    ...item,
+                    userID: userID,
+                })
+            } else{
+                await updateDoc(doc(db, "cartItems", docs.docs[0].id), {
+                    ...item
+
+                })
+            }
+        })
+    } catch (err) {
+        console.error(err)
+    }
+}
+
+export { signIn, signOutUser, isUserSignedIn, saveCart }

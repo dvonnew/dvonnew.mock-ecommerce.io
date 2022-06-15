@@ -7,8 +7,9 @@ import Cart from './CartComponents/ShoppingCart'
 import Item from './ShopComponents/ItemPage'
 import Profile from './UserProfileComponents/Profile'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { db, auth, signIn, signOutUser } from '../firebase'
+import { signIn, signOutUser, saveCart } from '../firebase'
 import { useAuthState } from 'react-firebase-hooks/auth'
+import { db, auth } from '../firebase-config'
 // import { collection, addDoc, Timestamp } from 'firebase/firestore'
 
 const App = () => {
@@ -33,6 +34,7 @@ const App = () => {
         const newCart = [...cart]
         newCart[i] = {'item': item.item, 'amount' : newAmount, 'total': newTotal}
         setCart(newCart)
+        saveCart(user.uid, newCart)
     }
 
     const onQuantityChange = (updatedItem, value) => {
@@ -42,6 +44,7 @@ const App = () => {
                 const newCart = [...cart]
                 newCart[i] = {'item': item.item, 'amount': value, 'total': newTotal}
                 setCart(newCart)
+                saveCart(user.uid, newCart)
         }})
     }
 
@@ -50,11 +53,13 @@ const App = () => {
                 cart.find((item, i) => {
                     if (item.item.id === cartItemDetail.item.id){
                         addCartQuantity(i, item, cartItemDetail)
+            
                     }
                 })
             } else{
-            const newCartItem = [...cart, cartItemDetail]
-            setCart(newCartItem)
+            const newCart = [...cart, cartItemDetail]
+            setCart(newCart)
+            saveCart(user.uid, newCart)
         }
     }
 
