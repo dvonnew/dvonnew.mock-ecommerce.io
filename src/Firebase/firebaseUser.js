@@ -48,28 +48,5 @@ function isUserSignedIn() {
     return !!auth.currentUser;
 }
 
-// Cart Storage
+export { signIn, signOutUser, isUserSignedIn }
 
-async function saveCart(userID, cart) {
-    try{
-        cart.forEach(async function (item) {
-            const q = query(collection(db, "cartItems"), where("userID", "==", userID), where("item.id", "==", item.item.id))
-            const docs = await getDocs(q)
-            if (docs.docs.length === 0) {
-                await addDoc(collection(db, "cartItems"), {
-                    ...item,
-                    userID: userID,
-                })
-            } else{
-                await updateDoc(doc(db, "cartItems", docs.docs[0].id), {
-                    ...item
-
-                })
-            }
-        })
-    } catch (err) {
-        console.error(err)
-    }
-}
-
-export { signIn, signOutUser, isUserSignedIn, saveCart }

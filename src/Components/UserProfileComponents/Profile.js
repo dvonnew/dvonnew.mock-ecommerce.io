@@ -1,5 +1,5 @@
 import React from "react";
-import Address from "./Address";
+import Address from "./AddressComponents/Address";
 import PaymentInfo from "./PaymentInfo";
 
 const Profile = (props) => {
@@ -18,7 +18,7 @@ const Profile = (props) => {
                         <p>{user.email}</p>
                     </div>
                 </div>
-                <Address />
+                <Address user={user}/>
                 <PaymentInfo />
             </>
         )

@@ -7,26 +7,35 @@ import Cart from './CartComponents/ShoppingCart'
 import Item from './ShopComponents/ItemPage'
 import Profile from './UserProfileComponents/Profile'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { signIn, signOutUser, saveCart } from '../firebase'
+import { signIn, signOutUser } from '../Firebase/firebaseUser'
+import { saveCart, getUserCart, deleteCartItem } from '../Firebase/firebaseCart'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { db, auth } from '../firebase-config'
-// import { collection, addDoc, Timestamp } from 'firebase/firestore'
+import { auth } from '../Firebase/firebase-config'
+
 
 const App = () => {
 
-    const [cart, setCart] = useState([])
-    const [user, login, error] = useAuthState(auth)
 
-    useEffect(() => {
-        console.log(cart)
-    }, [cart])
+    const [user, login, error] = useAuthState(auth)
+    const [cart, setCart] = useState([])
 
     useEffect(() => {
         if (!user) return
-        console.log(user)
+        getCart()
     }, [user])
 
+
     //Cart Related
+
+    const getCart = async () => {
+        const newCart = await getUserCart(user.uid)
+        setCart(newCart)
+    }
+
+    const signOut = () => {
+        signOutUser()
+        setCart([])
+    }
 
     const addCartQuantity = (i, item, updatedItem) => {
         const newAmount = updatedItem.amount + item.amount
@@ -69,6 +78,7 @@ const App = () => {
                 const newCart = [...cart]
                 newCart.splice(i, 1)
                 setCart(newCart)
+                deleteCartItem(user.uid, cartItem.item.id)
             }
         })
     }
@@ -77,7 +87,7 @@ const App = () => {
         <>
             <Router>
                 <div>
-                    <Nav signIn={signIn} signOut={signOutUser} user={user}/>
+                    <Nav signIn={signIn} signOut={signOut} user={user}/>
                     <Routes>
                         <Route path="/" exact element={<Home />} />
                         <Route path="/shop" exact element={<Shop />} />
