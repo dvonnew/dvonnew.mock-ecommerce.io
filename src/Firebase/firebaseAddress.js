@@ -12,6 +12,7 @@ import {
     setDoc,
     Timestamp,
     deleteDoc
+
 } from "firebase/firestore"
 
 let time = Timestamp.now()
@@ -39,27 +40,26 @@ async function saveUserAddress(userID, address) {
 
 async function getUserAddress(userID) {
     try {
-        let address = {}
+        let address = []
         if (!isUserSignedIn()) {
             return address
         } else {
             const q = query(collection(db, "addresses"), where("userID", "==", userID))
             const docs = await getDocs(q)
             if (docs.docs.length === 0) {
-                address.street = ""
-                address.apt = ""
-                address.city = ""
-                address.state = ""
-                address.zipcode = "" 
-                return address
+                return
             } else {
                 docs.docs.forEach(info => {
-                    address.street = info.data().street
-                    address.apt = info.data().apt
-                    address.city = info.data().city
-                    address.state = info.data().state
-                    address.zipcode = info.data().zipcode
-                    address.id = info.data().id
+                    const location = {
+                        name:info.data().name,
+                        street:info.data().street,
+                        apt: info.data().apt,
+                        city :info.data().city,
+                        state :info.data().state,
+                        zipcode :info.data().zipcode,
+                        id: info.data().id
+                    }
+                    address.push(location)
                 })
                 return address
             }
@@ -69,4 +69,14 @@ async function getUserAddress(userID) {
     }
 }
 
-export { saveUserAddress, getUserAddress}
+async function deleteAddressFS(userID, addressID) {
+    try{
+        const q = query(collection(db, "addresses"), where("userID", "==", userID), where("id", "==", addressID))
+        const docs = await getDocs(q)
+        await deleteDoc(doc(db, "addresses", docs.docs[0].id))
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+export { saveUserAddress, getUserAddress, deleteAddressFS}

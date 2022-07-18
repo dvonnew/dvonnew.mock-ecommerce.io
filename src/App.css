@@ -226,3 +226,55 @@ button{
   display: flex;
   flex-direction: row;
 }
+
+.address-box, .payment-info-box{
+  height: 300px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.address-display-box, .payment-info-display-box{
+  height: 200px;
+  width: 75%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.address-form, .payment-form{
+  height: 100px;
+  width: 3
+  00px;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.address-card, .payment-card {
+  display: flex;
+  justify-content: center;
+  align-items: space-evenly;
+  padding: 5px;
+  height: 175px;
+  width: 175px;
+  border: 0.5px solid grey;
+  border-radius: 5px;
+  box-shadow: .5px grey;
+}
+
+.add-address-card, .add-payment-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 175px;
+  width: 175px;
+  border: 0.5px solid grey;
+  border-radius: 5px;
+  box-shadow: .5px grey;
+}
+.add-address, .add-payment{
+  height: 70px;
+  width: 70px;
+}

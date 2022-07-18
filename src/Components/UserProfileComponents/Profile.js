@@ -1,6 +1,6 @@
 import React from "react";
 import Address from "./AddressComponents/Address";
-import PaymentInfo from "./PaymentInfo";
+import PaymentInfo from "./PaymentComponents/PaymentInfo";
 
 const Profile = (props) => {
 
