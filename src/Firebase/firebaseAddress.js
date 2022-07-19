@@ -1,4 +1,4 @@
-import { db, auth } from './firebase-config'
+import { db } from './firebase-config'
 import { isUserSignedIn } from './firebaseUser'
 import {
     query,

@@ -1,5 +1,6 @@
 import React from "react";
 import CartCard from "./CartCard";
+import { Link } from "react-router-dom"
 
 
 const Cart = (props) => {
@@ -7,7 +8,7 @@ const Cart = (props) => {
     const { cart } = props
 
 
-    if (cart.length === 0){
+    if (!cart || cart.length === 0) {
         return (
             <>
                 <h1>Cart</h1>
@@ -23,6 +24,9 @@ const Cart = (props) => {
                         <CartCard item={item} key={item.item.id} deleteItem={props.deleteItem} onQuantityChange={props.onQuantityChange} />
                     ))}
                 </div>
+                <Link>
+                    <button className='check-out-button'>Check Out</button>
+                </Link>
             </div>
     )
     }

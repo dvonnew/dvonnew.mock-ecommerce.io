@@ -60,7 +60,7 @@ const Address = (props) => {
             <div className="address-box">
                 <h3>Address:</h3>
                     <div className="address-display-box">
-                    <AddressForm address={address} onCancel={onCancel} display={formStyle} save={saveAddress}/>
+                    <AddressForm onCancel={onCancel} display={formStyle} save={saveAddress}/>
                     {address.map(location => (
                         <AddressDisplay address={location} delete={deleteAddress} key={location.id}/>
                     ))}

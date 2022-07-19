@@ -2,7 +2,7 @@ import React from 'react'
 
 const AddressDisplay = (props) => {
     
-    const { address, display } = props
+    const { address } = props
 
     const deleteAddress = () =>{
         props.delete(address.id)
@@ -16,7 +16,7 @@ const AddressDisplay = (props) => {
         return(
             <>
                 <div className='address-card'>
-                    <div className='address-display' style={display}>
+                    <div className='address-display'>
                         <p>{address.name}</p>
                         <p>{address.street} {address.apt}</p>
                         <p>{address.city}, {address.state} {address.zipcode}</p>
