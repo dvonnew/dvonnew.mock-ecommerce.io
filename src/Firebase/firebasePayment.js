@@ -41,7 +41,7 @@ async function saveUserPaymentInfo(userID, paymentInfo) {
 async function getUserPaymentInfo(userID) {
     try {
         let paymentInfo = []
-        if (isUserSignedIn()){
+        if (!isUserSignedIn()){
             return paymentInfo
         } else {
             const q = query(collection(db, "paymentInformation"), where("userID", "==", userID))
