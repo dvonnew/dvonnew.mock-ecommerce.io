@@ -19,7 +19,7 @@ const Profile = (props) => {
                     </div>
                 </div>
                 <Address user={user}/>
-                <PaymentInfo />
+                <PaymentInfo user={user}/>
             </>
         )
     }
