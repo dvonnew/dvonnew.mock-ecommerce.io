@@ -12,7 +12,8 @@ const AddressForm = (props) => {
         city: "",
         state: "",
         zipcode: "",
-        id: uniqid()
+        id: uniqid(),
+        primary: false
     }
 
     const [info, setInfo] = useState(initialState)
@@ -27,6 +28,13 @@ const AddressForm = (props) => {
 
     const handleChange = (e) => {
         const {name, value} = e.target
+        if (name === 'primary'){
+            if(value=== 'true'){
+                setInfo((prevState) => ({...prevState, [name]: true}))
+            } else{
+                setInfo((prevState) => ({...prevState, [name]: false}))
+            }
+        }
         setInfo((prevState) => ({...prevState, [name]: value}))
     }
 
@@ -42,18 +50,21 @@ const AddressForm = (props) => {
     return(
         <>
             <form className='address-form' style={display}>
-                <label>Name: </label>
+                <p>* indicates required items</p>
+                <label>* Name: </label>
                 <input className="name-input" onChange={handleChange} name="name" value={info.name} type="text" required />
-                <label>Street: </label>
+                <label>* Street: </label>
                 <input className="street-input" onChange={handleChange} name="street" value={info.street} type="text" required />
                 <label>Apt #: </label>
                 <input className="apt-inpt" onChange={handleChange} name="apt" value={info.apt} type='text' />
-                <label>City: </label>
+                <label>* City: </label>
                 <input className="city-input" onChange={handleChange} name="city" value={info.city} type="text" required/>
-                <label>State:</label>
+                <label>* State:</label>
                 <select className="state-input" onChange={handleChange} name="state" type="text" required="true">{stateOptions}</select>
-                <label>Zipcode:</label>
+                <label>* Zipcode:</label>
                 <input className="zipcode-input" onChange={handleChange} name="zipcode" value={info.zipcode} type="text" required minLength={5} maxLength={5} />
+                <label>Primary Address?</label>
+                <input type='checkbox' name='primary' value='true' />
                 <button className='addres-save-button' onClick={onSave} type='submit'>Save</button>
                 <button className='cancel-address' onClick={props.onCancel}>Cancel</button>
             </form>

@@ -14,7 +14,8 @@ const PaymentForm = (props) => {
         cvv: "",
         zipcode: "",
         cardType:"",
-        id: uniqid()
+        id: uniqid(),
+        primary: "no"
     }
 
     const [info, setInfo] = useState(initialState)
@@ -68,6 +69,13 @@ const PaymentForm = (props) => {
 
     const handleChange = (e) => {
         const {name, value} = e.target
+        if (name === 'primary'){
+            if(value=== 'yes'){
+                setInfo((prevState) => ({...prevState, [name]: value}))
+            } else{
+                setInfo((prevState) => ({...prevState, [name]: "no"}))
+            }
+        }
         setInfo((prevState) => ({...prevState, [name]:value}))
         validateCardNumber(info.number)
     }
@@ -92,19 +100,22 @@ const PaymentForm = (props) => {
     return (
         <>
             <form className="payment-form" style={display}>
-                <label>Name:</label>
+                <p>* indicated required items</p>
+                <label>* Name:</label>
                 <input className="name-input" onChange={handleChange} value={info.name} name='name' type='text' required />
-                <label>Number:</label>
+                <label>* Number:</label>
                 <input className='number-input' onChange={handleChange} name='number' value={info.number} type='text' required minLength={8} maxLength={19}/>
                 <div className='exp'>
-                    <label>Expiration Date (Mon/Year):</label>
+                    <label>*Expiration Date (Mon/Year):</label>
                     <input className='month-input' onChange={handleChange} name='month' value={info.month} type='text' required minLength={1} maxLength={2} />
                     <input className='year-input' onChange={handleChange} name='year' value={info.year} type='text' required minLength={4} maxLength={4} />
                 </div>
-                <label>CVV:</label>
+                <label>* CVV:</label>
                 <input className='cvv-input' onChange={handleChange} name='cvv' value={info.cvv} type='text' required minLength={3} maxLength={3} />
-                <label>Zipcode:</label>
+                <label>* Zipcode:</label>
                 <input className='zipcode-input' onChange={handleChange} name='zipcode' value={info.zipcode} type='text' required minLength={5} maxLength={5} />
+                <label>Primary Address?</label>
+                <input type='checkbox' name='primary' value='yes' />
                 <button className='payment-save-button' onClick={onSave} type='submit'>Save</button>
                 <button className='cancel-payment' onClick={onCancel}>Cancel</button>
             </form>
