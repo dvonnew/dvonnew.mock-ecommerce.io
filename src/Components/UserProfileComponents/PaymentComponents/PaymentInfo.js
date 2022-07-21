@@ -33,7 +33,8 @@ const PaymentInfo = (props) => {
     }
 
     const savePaymentInfo = (info) => {
-        setPaymentInfo(...paymentInfo, info)
+        let newPayment = [...paymentInfo, info]
+        setPaymentInfo(newPayment)
         setFrom({display:'none'})
         saveUserPaymentInfo(user.uid, info)
     }

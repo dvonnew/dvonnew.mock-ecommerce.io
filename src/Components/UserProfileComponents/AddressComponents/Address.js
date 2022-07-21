@@ -33,7 +33,8 @@ const Address = (props) => {
     }
 
     const saveAddress = (addressInfo) => {
-        setAddress(...address, addressInfo)
+        let newAddress = [...address, addressInfo]
+        setAddress(newAddress)
         setForm({display: "none"})
         saveUserAddress(user.uid, addressInfo)
     }
