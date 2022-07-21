@@ -3,7 +3,6 @@ import AddressForm from "./AddressForm";
 import AddressDisplay from "./AddressDisplay";
 import { saveUserAddress, getUserAddress, deleteAddressFS } from "../../../Firebase/firebaseAddress";
 
-
 const Address = (props) => {
 
     const { user } = props
@@ -16,9 +15,9 @@ const Address = (props) => {
         getAddress()
     }, [user])
 
-    useEffect(()=>{
-        getAddress()
-    }, [address])
+    // useEffect(()=>{
+    //     getAddress()
+    // }, [address])
 
     const getAddress = async () =>{
         const addressInfo = await getUserAddress(user.uid)
@@ -34,7 +33,7 @@ const Address = (props) => {
     }
 
     const saveAddress = (addressInfo) => {
-        setAddress(addressInfo)
+        setAddress(...address, addressInfo)
         setForm({display: "none"})
         saveUserAddress(user.uid, addressInfo)
     }

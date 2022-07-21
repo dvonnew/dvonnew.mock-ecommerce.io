@@ -15,9 +15,9 @@ const PaymentInfo = (props) => {
         getPaymentInfo()
     }, [user])
 
-    useEffect(() => {
-        getPaymentInfo()
-    }, [paymentInfo])
+    // useEffect(() => {
+    //     getPaymentInfo()
+    // }, [paymentInfo])
 
     const getPaymentInfo = async () => {
         const info = await getUserPaymentInfo(user.uid)
@@ -33,7 +33,7 @@ const PaymentInfo = (props) => {
     }
 
     const savePaymentInfo = (info) => {
-        setPaymentInfo(info)
+        setPaymentInfo(...paymentInfo, info)
         setFrom({display:'none'})
         saveUserPaymentInfo(user.uid, info)
     }
