@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PaymentForm from './PaymentInfoForm';
 import PaymentDisplay from './PaymentDisplay';
-import {  saveUserPaymentInfo, getUserPaymentInfo, deletePaymentInfoFS} from '../../../Firebase/firebasePayment';
+import { saveUserPaymentInfo, getUserPaymentInfo, deletePaymentInfoFS } from '../../../Firebase/firebasePayment';
 
 const PaymentInfo = (props) => {
 
@@ -20,7 +20,7 @@ const PaymentInfo = (props) => {
     }, [paymentInfo])
 
     const getPaymentInfo = async () => {
-        const info = await getUserPaymentInfo(user.id)
+        const info = await getUserPaymentInfo(user.uid)
         setPaymentInfo(info)
     }
 
@@ -35,11 +35,11 @@ const PaymentInfo = (props) => {
     const savePaymentInfo = (info) => {
         setPaymentInfo(info)
         setFrom({display:'none'})
-        saveUserPaymentInfo(user.id, info)
+        saveUserPaymentInfo(user.uid, info)
     }
 
     const deleteCard = (paymentID) => {
-        deletePaymentInfoFS(user.id, paymentID)
+        deletePaymentInfoFS(user.uid, paymentID)
     }
 
     if (!paymentInfo || paymentInfo.length === 0) {

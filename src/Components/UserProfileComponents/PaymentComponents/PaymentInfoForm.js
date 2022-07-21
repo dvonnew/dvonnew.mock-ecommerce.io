@@ -114,7 +114,7 @@ const PaymentForm = (props) => {
                 <input className='cvv-input' onChange={handleChange} name='cvv' value={info.cvv} type='text' required minLength={3} maxLength={3} />
                 <label>* Zipcode:</label>
                 <input className='zipcode-input' onChange={handleChange} name='zipcode' value={info.zipcode} type='text' required minLength={5} maxLength={5} />
-                <label>Primary Address?</label>
+                <label>Primary Card?</label>
                 <input type='checkbox' name='primary' value='yes' />
                 <button className='payment-save-button' onClick={onSave} type='submit'>Save</button>
                 <button className='cancel-payment' onClick={onCancel}>Cancel</button>
