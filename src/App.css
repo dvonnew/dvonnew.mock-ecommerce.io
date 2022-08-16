@@ -264,6 +264,18 @@ button{
   box-shadow: .5px grey;
 }
 
+.address-card-primary, .payment-card-primary {
+  display: flex;
+  justify-content: center;
+  align-items: space-evenly;
+  padding: 5px;
+  height: 175px;
+  width: 175px;
+  border: 1px solid rgb(38, 186, 1);
+  border-radius: 5px;
+  box-shadow: .5px grey;
+}
+
 .add-address-card, .add-payment-card {
   display: flex;
   justify-content: center;

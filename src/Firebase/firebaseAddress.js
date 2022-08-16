@@ -38,6 +38,22 @@ async function saveUserAddress(userID, address) {
     }
 }
 
+async function checkPrimaryStatus(userID){
+    try {
+        const q = query(collection(db, "addresses"), where("userID", "==", userID), where("primary", "==", true))
+        const docs = await getDocs(q)
+        if (docs.docs.length === 0){
+            return
+        } else {
+            await updateDoc(doc(db, "addresses", docs.docs[0].id), {
+                primary: false
+            })
+        }
+    } catch (err) {
+        console.error(err)
+    }
+}
+
 async function getUserAddress(userID) {
     try {
         let address = []
@@ -57,7 +73,8 @@ async function getUserAddress(userID) {
                         city :info.data().city,
                         state :info.data().state,
                         zipcode :info.data().zipcode,
-                        id: info.data().id
+                        id: info.data().id,
+                        primary: info.data().primary
                     }
                     address.push(location)
                 })

@@ -31,8 +31,6 @@ const AddressForm = (props) => {
         if (name === 'primary'){
             if(value=== 'true'){
                 setInfo((prevState) => ({...prevState, [name]: true}))
-            } else{
-                setInfo((prevState) => ({...prevState, [name]: false}))
             }
         }
         setInfo((prevState) => ({...prevState, [name]: value}))

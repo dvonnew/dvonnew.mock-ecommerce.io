@@ -15,7 +15,7 @@ const PaymentForm = (props) => {
         zipcode: "",
         cardType:"",
         id: uniqid(),
-        primary: "no"
+        primary: false
     }
 
     const [info, setInfo] = useState(initialState)
@@ -70,10 +70,10 @@ const PaymentForm = (props) => {
     const handleChange = (e) => {
         const {name, value} = e.target
         if (name === 'primary'){
-            if(value=== 'yes'){
-                setInfo((prevState) => ({...prevState, [name]: value}))
+            if(value=== 'true'){
+                setInfo((prevState) => ({...prevState, [name]: true}))
             } else{
-                setInfo((prevState) => ({...prevState, [name]: "no"}))
+                setInfo((prevState) => ({...prevState, [name]: false}))
             }
         }
         setInfo((prevState) => ({...prevState, [name]:value}))
@@ -115,7 +115,7 @@ const PaymentForm = (props) => {
                 <label>* Zipcode:</label>
                 <input className='zipcode-input' onChange={handleChange} name='zipcode' value={info.zipcode} type='text' required minLength={5} maxLength={5} />
                 <label>Primary Card?</label>
-                <input type='checkbox' name='primary' value='yes' />
+                <input type='checkbox' name='primary' value='true' />
                 <button className='payment-save-button' onClick={onSave} type='submit'>Save</button>
                 <button className='cancel-payment' onClick={onCancel}>Cancel</button>
             </form>

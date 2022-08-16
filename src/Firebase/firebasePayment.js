@@ -19,6 +19,9 @@ let time = Timestamp.now()
 
 async function saveUserPaymentInfo(userID, paymentInfo) {
     try {
+        if(paymentInfo.primary === true) {
+            checkPrimaryStatus(userID)
+        }
         const q = query(collection(db, "paymentInformation"), where("userID", "==", userID), where("id", "==", paymentInfo.id))
         const docs = await getDocs(q)
         if (docs.docs.length === 0) {
@@ -31,6 +34,22 @@ async function saveUserPaymentInfo(userID, paymentInfo) {
             await updateDoc(doc(db, "paymentInformation", docs.docs[0].id), {
                 ...paymentInfo,
                 time: time
+            })
+        }
+    } catch (err) {
+        console.error(err)
+    }
+}
+
+async function checkPrimaryStatus(userID){
+    try {
+        const q = query(collection(db, "paymentInformation"), where("userID", "==", userID), where("primary", "==", true))
+        const docs = await getDocs(q)
+        if (docs.docs.length === 0){
+            return
+        } else {
+            await updateDoc(doc(db, "paymentInformation", docs.docs[0].id), {
+                primary: false
             })
         }
     } catch (err) {
@@ -58,7 +77,8 @@ async function getUserPaymentInfo(userID) {
                         cvv: info.data().year,
                         zipcode: info.data().zipcode,
                         cardType: info.data().cardType,
-                        id: info.data().id
+                        id: info.data().id,
+                        primary: info.data().primary
                     }
                     paymentInfo.push(card)
                 })

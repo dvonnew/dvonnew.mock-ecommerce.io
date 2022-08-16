@@ -12,7 +12,21 @@ const AddressDisplay = (props) => {
         return(
             <></>
         )
-    } else {
+    } if (address.primary === true){
+        return(
+            <>
+                <div className='address-card-primary'>
+                    <div className='address-display'>
+                        <p>{address.name}</p>
+                        <p>{address.street} {address.apt}</p>
+                        <p>{address.city}, {address.state} {address.zipcode}</p>
+                        <button onClick={deleteAddress}>Delete</button>
+                    </div>
+                </div>
+            </>
+        )
+    } 
+    else {
         return(
             <>
                 <div className='address-card'>
