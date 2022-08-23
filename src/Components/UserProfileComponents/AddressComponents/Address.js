@@ -15,9 +15,9 @@ const Address = (props) => {
         getAddress()
     }, [user])
 
-    // useEffect(()=>{
-    //     getAddress()
-    // }, [address])
+    useEffect(()=>{
+        getAddress()
+    }, [address])
 
     const getAddress = async () =>{
         const addressInfo = await getUserAddress(user.uid)
@@ -33,10 +33,9 @@ const Address = (props) => {
     }
 
     const saveAddress = (addressInfo) => {
-        let newAddress = [...address, addressInfo]
-        setAddress(newAddress)
         setForm({display: "none"})
         saveUserAddress(user.uid, addressInfo)
+        getAddress()
     }
 
     const deleteAddress = (addressID) => {

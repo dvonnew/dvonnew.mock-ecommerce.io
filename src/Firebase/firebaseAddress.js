@@ -12,7 +12,6 @@ import {
     setDoc,
     Timestamp,
     deleteDoc
-
 } from "firebase/firestore"
 
 let time = Timestamp.now()

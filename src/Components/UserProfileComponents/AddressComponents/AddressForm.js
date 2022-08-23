@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import uniqid from 'uniqid'
 
 const AddressForm = (props) => {
 
-    const { display, save } = props
+    const { display, save, onCancel } = props
+    const [isChecked, setisChecked] = useState(false)
 
     const initialState = {
         name: "",
@@ -16,6 +17,10 @@ const AddressForm = (props) => {
         primary: false
     }
 
+    useEffect(() => {
+        setInfo((prevState) => ({...prevState, 'primary': isChecked}))
+    }, [isChecked])
+
     const [info, setInfo] = useState(initialState)
 
     const states = ["AK", "AL", "AR", "AZ", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IL", "IN", "IA", 
@@ -23,17 +28,27 @@ const AddressForm = (props) => {
     "OH", "OK", "OR", "PA", "PR", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY" ]
 
     const stateOptions = states.map(state => {
-        return <option key={state}>{state}</option>
+        return <option key={state} value={state}>{state}</option>
     })
 
     const handleChange = (e) => {
         const {name, value} = e.target
         if (name === 'primary'){
-            if(value=== 'true'){
-                setInfo((prevState) => ({...prevState, [name]: true}))
-            }
+            return
         }
         setInfo((prevState) => ({...prevState, [name]: value}))
+        
+    }
+
+    const handleClick = () => {
+        setisChecked(!isChecked)
+    }
+    
+    const cancel = (e) => {
+        e.preventDefault()
+        onCancel()
+        setInfo(initialState)
+        setisChecked(false)
     }
 
     const onSave = (e) => {
@@ -42,6 +57,8 @@ const AddressForm = (props) => {
             return
         } else {
             save(info)
+            setInfo(initialState)
+            setisChecked(false)
         }
     }
 
@@ -62,9 +79,9 @@ const AddressForm = (props) => {
                 <label>* Zipcode:</label>
                 <input className="zipcode-input" onChange={handleChange} name="zipcode" value={info.zipcode} type="text" required minLength={5} maxLength={5} />
                 <label>Primary Address?</label>
-                <input type='checkbox' name='primary' value='true' />
+                <input type='checkbox' checked={isChecked} name='primary' onChange={handleClick} />
                 <button className='addres-save-button' onClick={onSave} type='submit'>Save</button>
-                <button className='cancel-address' onClick={props.onCancel}>Cancel</button>
+                <button className='cancel-address' onClick={cancel}>Cancel</button>
             </form>
         </>
     )

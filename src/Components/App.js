@@ -6,6 +6,7 @@ import Shop from './ShopComponents/ShopPage'
 import Cart from './CartComponents/ShoppingCart'
 import Item from './ShopComponents/ItemPage'
 import Profile from './UserProfileComponents/Profile'
+import CheckoutPage from './CheckoutComponents/Checkout'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { signIn, signOutUser } from '../Firebase/firebaseUser'
 import { saveCart, getUserCart, deleteCartItem } from '../Firebase/firebaseCart'
@@ -91,9 +92,10 @@ const App = () => {
                     <Routes>
                         <Route path="/" exact element={<Home />} />
                         <Route path="/shop" exact element={<Shop />} />
-                        <Route path="/cart"  element={<Cart cart={cart} deleteItem={deleteItem} onQuantityChange={onQuantityChange} />} />
+                        <Route path="/cart"  element={<Cart cart={cart} user={user} deleteItem={deleteItem} onQuantityChange={onQuantityChange} />} />
                         <Route path="/shop/:id" element={<Item addToCart={addToCart} />} />
                         <Route path="/profile" element={<Profile user={user}/>} />
+                        <Route path="/cart/checkout" element={<CheckoutPage user={user} cart={cart} />}/>
                     </Routes>
                 </div>
             </Router>

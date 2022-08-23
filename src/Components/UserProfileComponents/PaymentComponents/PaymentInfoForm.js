@@ -5,6 +5,7 @@ import uniqid from 'uniqid';
 const PaymentForm = (props) => {
 
     const { display, save, cancel } = props
+    const [isChecked, setisChecked] = useState(false)
 
     const initialState = {
         name: "",
@@ -17,6 +18,10 @@ const PaymentForm = (props) => {
         id: uniqid(),
         primary: false
     }
+
+    useEffect(() => {
+        setInfo((prevState) => ({...prevState, 'primary': isChecked}))
+    }, [isChecked])
 
     const [info, setInfo] = useState(initialState)
 
@@ -63,27 +68,27 @@ const PaymentForm = (props) => {
                 valid = false
             }
         })
-        console.log('---bear---')
         return valid
     }
 
     const handleChange = (e) => {
         const {name, value} = e.target
         if (name === 'primary'){
-            if(value=== 'true'){
-                setInfo((prevState) => ({...prevState, [name]: true}))
-            } else{
-                setInfo((prevState) => ({...prevState, [name]: false}))
-            }
+            return
         }
         setInfo((prevState) => ({...prevState, [name]:value}))
         validateCardNumber(info.number)
+    }
+
+    const handleClick = () => {
+        setisChecked(!isChecked)
     }
 
     const onCancel = (e) => {
         e.preventDefault()
         cancel()
         setInfo(initialState)
+        setisChecked(!isChecked)
     }
 
     const onSave = (e) => {
@@ -91,6 +96,7 @@ const PaymentForm = (props) => {
         if(validateFields()) {
             save(info)
             setInfo(initialState)
+            setisChecked(!isChecked)
         } else {
             return
         }
@@ -101,7 +107,7 @@ const PaymentForm = (props) => {
         <>
             <form className="payment-form" style={display}>
                 <p>* indicated required items</p>
-                <label>* Name:</label>
+                <label>* Name on Card:</label>
                 <input className="name-input" onChange={handleChange} value={info.name} name='name' type='text' required />
                 <label>* Number:</label>
                 <input className='number-input' onChange={handleChange} name='number' value={info.number} type='text' required minLength={8} maxLength={19}/>
@@ -115,7 +121,7 @@ const PaymentForm = (props) => {
                 <label>* Zipcode:</label>
                 <input className='zipcode-input' onChange={handleChange} name='zipcode' value={info.zipcode} type='text' required minLength={5} maxLength={5} />
                 <label>Primary Card?</label>
-                <input type='checkbox' name='primary' value='true' />
+                <input type='checkbox' checked={isChecked} onChange={handleClick} name='primary' />
                 <button className='payment-save-button' onClick={onSave} type='submit'>Save</button>
                 <button className='cancel-payment' onClick={onCancel}>Cancel</button>
             </form>

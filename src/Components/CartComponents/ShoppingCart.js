@@ -7,7 +7,6 @@ const Cart = (props) => {
 
     const { cart } = props
 
-
     if (!cart || cart.length === 0) {
         return (
             <>
@@ -24,8 +23,8 @@ const Cart = (props) => {
                         <CartCard item={item} key={item.item.id} deleteItem={props.deleteItem} onQuantityChange={props.onQuantityChange} />
                     ))}
                 </div>
-                <Link>
-                    <button className='check-out-button'>Check Out</button>
+                <Link to='checkout'>
+                    <button className='check-out-button' >Check Out</button>
                 </Link>
             </div>
     )

@@ -80,6 +80,7 @@ async function getPrimaryPayment(userID) {
                     primary: docs.docs[0].data().primary
                 }
                 primaryPayment.push(card)
+                console.log(primaryPayment)
                 return primaryPayment
             }
         } 

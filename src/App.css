@@ -290,3 +290,17 @@ button{
   height: 70px;
   width: 70px;
 }
+
+.checkout-display {
+  height: 1200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.checkout-address {
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
