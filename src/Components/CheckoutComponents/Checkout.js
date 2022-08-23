@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CheckoutAddressForm from "./CheckoutAddressForm";
-import { saveUserAddress, getUserAddress, deleteAddressFS } from "../../../Firebase/firebaseAddress";
-import { getUserPaymentInfo } from "../../Firebase/firebasePayment";
+import { saveUserAddress, getUserAddress,  } from "../../../Firebase/firebaseAddress";
+import { getPrimaryPayment } from "../../Firebase/firebasePayment";
 
 const CheckoutPage = (props) => {
 
@@ -16,8 +16,8 @@ const CheckoutPage = (props) => {
     }, [user])
 
     const getUserInfo = async () => {
-        const payments = await getUserPaymentInfo()
-        const addresses = await getUserAddress()
+        const payments = await getPrimaryPayment(user.uid)
+        const addresses = await getUserAddress(user.uid)
 
         setAddressInfo(addresses)
         setPaymentInfo(payments)

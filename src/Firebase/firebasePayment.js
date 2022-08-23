@@ -57,6 +57,37 @@ async function checkPrimaryStatus(userID){
     }
 }
 
+async function getPrimaryPayment(userID) {
+    try {
+        let primaryPayment = []
+        if (!isUserSignedIn()) {
+            return primaryPayment
+        } else {
+            const q = query(collection(db, "paymentInformation"), where("userID", "==", userID), where("primary", "==", true))
+            const docs = await getDocs(q)
+            if (docs.docs.length === 0) {
+                return
+            } else {
+                const card = {
+                    name: docs.docs[0].data().name,
+                    number: docs.docs[0].data().number,
+                    month: docs.docs[0].data().month,
+                    year: docs.docs[0].data().year,
+                    cvv: docs.docs[0].data().cvv,
+                    zipcode: docs.docs[0].data().zipcode,
+                    cardType: docs.docs[0].data().cardType,
+                    id: docs.docs[0].data().id,
+                    primary: docs.docs[0].data().primary
+                }
+                primaryPayment.push(card)
+                return primaryPayment
+            }
+        } 
+    } catch (err) {
+        console.error(err)
+    }
+}
+
 async function getUserPaymentInfo(userID) {
     try {
         let paymentInfo = []
@@ -100,4 +131,4 @@ async function deletePaymentInfoFS(userID, paymentID) {
     }
 }
 
-export { saveUserPaymentInfo, getUserPaymentInfo, deletePaymentInfoFS }
+export { saveUserPaymentInfo, getUserPaymentInfo, deletePaymentInfoFS, getPrimaryPayment }
