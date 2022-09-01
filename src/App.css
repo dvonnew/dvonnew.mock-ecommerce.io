@@ -37,6 +37,10 @@ p{
   margin-top: 5px;
 }
 
+.shopBody {
+  padding: 5%;
+}
+
 .image-slider{
   width: 100%;
   height: 400px;
@@ -244,9 +248,8 @@ button{
 }
 
 .address-form, .payment-form{
-  height: 100px;
-  width: 3
-  00px;
+  height: 275px;
+  width: 300px;
   display: flex;
   flex-direction: column;
 }
@@ -295,12 +298,29 @@ button{
   height: 1200px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 
 .checkout-address {
-  height: 350px;
+  height: 300px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
 }
+
+.billing-info {
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.checkout-form-title {
+  margin-top: 5px;
+}
+
+.billing-address-check {
+  display: flex;
+  align-items: center;
+}
+

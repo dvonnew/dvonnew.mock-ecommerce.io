@@ -23,6 +23,7 @@ const App = () => {
     useEffect(() => {
         if (!user) return
         getCart()
+        console.log(cart)
     }, [user])
 
 
@@ -84,19 +85,27 @@ const App = () => {
         })
     }
 
+    const clearCart = () => {
+        cart.forEach((item) => {
+            deleteCartItem(user.uid, item.item.id)
+        })
+    }
+
     return(
         <>
             <Router>
                 <div>
                     <Nav signIn={signIn} signOut={signOut} user={user}/>
+                    <div className='shopBody'>
                     <Routes>
                         <Route path="/" exact element={<Home />} />
                         <Route path="/shop" exact element={<Shop />} />
                         <Route path="/cart"  element={<Cart cart={cart} user={user} deleteItem={deleteItem} onQuantityChange={onQuantityChange} />} />
                         <Route path="/shop/:id" element={<Item addToCart={addToCart} />} />
                         <Route path="/profile" element={<Profile user={user}/>} />
-                        <Route path="/cart/checkout" element={<CheckoutPage user={user} cart={cart} />}/>
+                        <Route path="/cart/checkout" element={<CheckoutPage user={user} cart={cart} clearCart={clearCart} />}/>
                     </Routes>
+                    </div>
                 </div>
             </Router>
         </>

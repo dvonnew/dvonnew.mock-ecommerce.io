@@ -44,7 +44,7 @@ async function saveUserPaymentInfo(userID, paymentInfo) {
 async function checkPrimaryStatus(userID){
     try {
         const q = query(collection(db, "paymentInformation"), where("userID", "==", userID), where("primary", "==", true))
-        const docs = await getDocs(q)
+        const docs = await getDoc(q)
         if (docs.docs.length === 0){
             return
         } else {
@@ -80,7 +80,6 @@ async function getPrimaryPayment(userID) {
                     primary: docs.docs[0].data().primary
                 }
                 primaryPayment.push(card)
-                console.log(primaryPayment)
                 return primaryPayment
             }
         } 
