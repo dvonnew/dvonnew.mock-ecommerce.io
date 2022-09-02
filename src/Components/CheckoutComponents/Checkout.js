@@ -4,6 +4,7 @@ import BillingForm from "./BillingInfoForm";
 import CheckoutBillingAddressForm from "./CheckoutBillingAddressForm";
 import { getPrimaryAddress } from "../../Firebase/firebaseAddress";
 import { getPrimaryPayment } from "../../Firebase/firebasePayment";
+import { saveUserOrder } from "../../Firebase/firebaseOrder";
 import uniqid from 'uniqid';
 
 const CheckoutPage = (props) => {
@@ -15,7 +16,8 @@ const CheckoutPage = (props) => {
         payment: '',
         shipToAddress: '',
         billToAddress: '',
-        total: 0
+        total: 0,
+        id: 0
     }
 
     const initialPaymentState = {
@@ -140,7 +142,8 @@ const CheckoutPage = (props) => {
 
     let total = totalCart()
 
-    const onOrder = () => {
+    const onOrder = (e) => {
+        e.preventDefault()
         setOrder({
             cart: cart,
             payment: paymentInfo,
@@ -149,6 +152,7 @@ const CheckoutPage = (props) => {
             total: total,
             id: uniqid()
         })
+
         setOrderStatus(true)
         props.clearCart()
     }

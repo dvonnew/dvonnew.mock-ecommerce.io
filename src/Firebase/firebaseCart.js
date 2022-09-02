@@ -25,7 +25,7 @@ async function getUserCart(userID) {
             const q = query(collection(db, "cartItems"), where("userID", "==", userID))
             const docs = await getDocs(q)
             if(docs.docs.length === 0){
-                return 
+                return cart
             } else {
                 docs.docs.forEach(cartItem => {
                     const cartItemDetail = {

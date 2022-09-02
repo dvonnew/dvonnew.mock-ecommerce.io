@@ -1,6 +1,7 @@
 import React from "react";
 import Address from "./AddressComponents/Address";
 import PaymentInfo from "./PaymentComponents/PaymentInfo";
+import Orders from "./OrdersComponents/Orders";
 
 const Profile = (props) => {
 
@@ -20,6 +21,7 @@ const Profile = (props) => {
                 </div>
                 <Address user={user}/>
                 <PaymentInfo user={user}/>
+                <Orders user={user} />
             </>
         )
     }
