@@ -15,7 +15,7 @@ const OrderDisplay = (props) => {
                             <li>{item.item}</li>
                         })}
                     </ul>
-                    <p>{order.shipToAddress}</p>
+                    <p>{order.shipToAddress.zipcode}</p>
                 </div>
             </div>
         </>

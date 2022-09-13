@@ -7,8 +7,12 @@ const Profile = (props) => {
 
     const { user } = props
 
-    if (user==null){
-        return
+    if (!user){
+        return (
+            <>
+                <h4>No User Signed-in</h4>
+            </>
+        )
     } else {
         return (
             <>

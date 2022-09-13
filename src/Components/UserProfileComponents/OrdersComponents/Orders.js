@@ -11,6 +11,7 @@ const Orders = (props) => {
     useEffect(() => {
         if(!user) return
         getUserOrders()
+        
     }, [user])
 
     const getUserOrders = async () => {
@@ -32,9 +33,9 @@ const Orders = (props) => {
             <>
                 <div className="order-history">
                     <h3>Order History:</h3>
-                    {orders.map(order => {
-                        <OrderDisplay order={order} />
-                    })}
+                    {orders.map(order => (
+                        <OrderDisplay order={order} key={order.id} />
+                    ))}
                 </div>
             </>
         )

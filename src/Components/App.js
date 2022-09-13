@@ -59,11 +59,6 @@ const App = () => {
     }
 
     const addToCart = (cartItemDetail) => {
-        if (cart.length === 0){
-            const newCart = [...cart, cartItemDetail]
-            setCart(newCart)
-            saveCart(user.uid, newCart)
-        }
         if (cart.find(item => item.item.id === cartItemDetail.item.id)){
                 cart.find((item, i) => {
                     if (item.item.id === cartItemDetail.item.id){

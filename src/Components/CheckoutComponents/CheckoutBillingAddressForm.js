@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const CheckoutBillingAddressForm = (props) => {
 
@@ -6,6 +6,12 @@ const CheckoutBillingAddressForm = (props) => {
 
     const [isChecked, setisChecked] = useState(false)
     const [useShipping, setUseShipping] = useState(false)
+
+    useEffect(() => {
+        if(isChecked===true){
+            props.useShipping()
+        }
+    })
 
     const states = ["AK", "AL", "AR", "AZ", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IL", "IN", "IA", 
     "KS", "KY", "LA", "MA", "MD", "ME", "MI", "MO", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NV", "NY",
@@ -18,9 +24,6 @@ const CheckoutBillingAddressForm = (props) => {
     const handleClick = (e) => {
         setisChecked(!isChecked)
         setUseShipping(!useShipping)
-        if (isChecked === true){
-            props.useShipping()
-        }
     }
 
     if (useShipping === false ){

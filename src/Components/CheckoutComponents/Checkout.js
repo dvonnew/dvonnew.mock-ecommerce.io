@@ -11,13 +11,25 @@ const CheckoutPage = (props) => {
 
     const { user, cart } = props
 
+    const totalCart = () => {
+        let total = 0
+
+        cart.forEach(item => {
+            total += item.total
+        });
+
+        return total.toFixed(2)
+    }
+
+    let total = totalCart()
+
     const initialOrderState = {
         cart: cart,
         payment: '',
         shipToAddress: '',
         billToAddress: '',
-        total: 0,
-        id: 0
+        total: total,
+        id: uniqid()
     }
 
     const initialPaymentState = {
@@ -31,6 +43,7 @@ const CheckoutPage = (props) => {
         id: uniqid(),
         primary: false
     }
+
     const initialAddressState = {
         name: "",
         street: "",
@@ -53,6 +66,16 @@ const CheckoutPage = (props) => {
         getUserInfo()
     }, [user])
 
+    useEffect(() => {
+        if(isOrdered===true){
+            if(!user){
+                saveUserOrder(order.id, order)
+            } else {
+            saveUserOrder(user.uid, order)
+            }
+        }
+    })
+
     const getUserInfo = async () => {
         initializePaymentInfo()
         initializeAddressInfo()
@@ -66,6 +89,7 @@ const CheckoutPage = (props) => {
         } else {
             let newPayment = primaryPayment[0]
             setPaymentInfo(newPayment)
+            setOrder((prevState) => ({...prevState, payment: newPayment}))
         }
     }
 
@@ -130,29 +154,14 @@ const CheckoutPage = (props) => {
         setBillingAddressInfo((prevState) => ({...prevState, [name]:value}))
     }
 
-    const totalCart = () => {
-        let total = 0
-
-        cart.forEach(item => {
-            total += item.total
-        });
-
-        return total.toFixed(2)
-    }
-
-    let total = totalCart()
-
     const onOrder = (e) => {
         e.preventDefault()
-        setOrder({
-            cart: cart,
+        setOrder((prevState) => ({
+            ...prevState,
             payment: paymentInfo,
             shipToAddress: shippingAddressInfo,
             billToAddress: billingAddressInfo,
-            total: total,
-            id: uniqid()
-        })
-
+        }))
         setOrderStatus(true)
         props.clearCart()
     }

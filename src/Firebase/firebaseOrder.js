@@ -21,7 +21,7 @@ async function saveUserOrder(userID, orderInfo) {
     try {
         const q = query(collection(db, "orders"), where("userID", "==", userID), where("id", "==", orderInfo.id))
         const docs = await getDocs(q)
-        if (docs.docs.length === 0) {
+        if (docs.docs.length === 0 && userID !== null) {
             await addDoc(collection(db, "orders"), {
                 ...orderInfo,
                 userID: userID,
@@ -33,6 +33,7 @@ async function saveUserOrder(userID, orderInfo) {
                 time: time
             })
         }
+        
     } catch (err) {
         console.error(err)
     }
@@ -41,12 +42,12 @@ async function saveUserOrder(userID, orderInfo) {
 async function getOrders(userID) {
     try {
         let orders = []
-        if (!isUserSignedIn) {
+        if (!isUserSignedIn()) {
             return orders
         } else {
             const q = query(collection(db, "orders"), where("userID", "==", userID))
-            const docs = getDocs(q)
-            if (docs.length === 0) {
+            const docs = await getDocs(q)
+            if (docs.docs.length === 0) {
                 return orders
             } else {
                 docs.docs.forEach(order => {
@@ -61,7 +62,9 @@ async function getOrders(userID) {
                     }
                     orders.push(info)
                 });
+                console.log(orders)
                 return orders
+                
             }
         }
     } catch (err) {

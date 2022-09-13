@@ -231,14 +231,14 @@ button{
   flex-direction: row;
 }
 
-.address-box, .payment-info-box{
+.address-box, .payment-info-box, .order-history{
   height: 300px;
   width: 100%;
   display: flex;
   flex-direction: column;
 }
 
-.address-display-box, .payment-info-display-box{
+.address-display-box, .payment-info-display-box {
   height: 200px;
   width: 75%;
   display: flex;
@@ -255,7 +255,7 @@ button{
 }
 
 
-.address-card, .payment-card {
+.address-card, .payment-card, .order-card {
   display: flex;
   justify-content: center;
   align-items: space-evenly;
