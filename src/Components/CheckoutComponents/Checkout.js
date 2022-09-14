@@ -28,6 +28,7 @@ const CheckoutPage = (props) => {
         payment: '',
         shipToAddress: '',
         billToAddress: '',
+        email: '',
         total: total,
         id: uniqid()
     }
@@ -60,6 +61,8 @@ const CheckoutPage = (props) => {
     const [billingAddressInfo, setBillingAddressInfo] = useState(initialAddressState)
     const [order, setOrder] = useState(initialOrderState)
     const [isOrdered, setOrderStatus] = useState(false)
+    const [email, setEmail] = useState()
+    const [confirmationEmail, setConfirmationEmail] = useState()
 
     useEffect(() => {
         if(!user) return
@@ -79,6 +82,41 @@ const CheckoutPage = (props) => {
     const getUserInfo = async () => {
         initializePaymentInfo()
         initializeAddressInfo()
+        initializeEmail()
+    }
+
+    const initializeEmail = () => {
+        if (!user) {
+            return
+        } else {
+            setEmail(user.email)
+        }
+    }
+
+    const handleEmailChange = (e) => {
+        const {name, value} = e.target
+        if (name === 'email') {
+            setEmail(value)
+        } else {
+            setConfirmationEmail(value)
+        }
+    }
+
+    const validateEmail = () => {
+        if (!email || !confirmationEmail) {
+            alert('Invalid email address or emails do not match. Please re-enter email.')
+            return false
+        }
+        if (email.toLowerCase() !== confirmationEmail.toLowerCase()) {
+            alert('Invalid email address or emails do not match. Please re-enter email.')
+            return false
+        } else {
+            return String(email)
+                .toLowerCase()
+                .match(
+                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+                );
+        }
     }
 
     const initializePaymentInfo = async () => {
@@ -145,8 +183,9 @@ const CheckoutPage = (props) => {
         setShippingAddressInfo((prevState) => ({...prevState, [name]:value}))
     }
 
-    const useShippingAddress = () => {
+    const useShippingAddress = (e) => {
         setBillingAddressInfo(shippingAddressInfo)
+        console.log(shippingAddressInfo)
     }
 
     const handleBillingAddressChange = (e) => {
@@ -156,9 +195,14 @@ const CheckoutPage = (props) => {
 
     const onOrder = (e) => {
         e.preventDefault()
+        if (!validateEmail()) {
+            console.log("invalid email")
+            return
+        }
         setOrder((prevState) => ({
             ...prevState,
             payment: paymentInfo,
+            email: email,
             shipToAddress: shippingAddressInfo,
             billToAddress: billingAddressInfo,
         }))
@@ -170,21 +214,29 @@ const CheckoutPage = (props) => {
         return (
             <>
                 <div className='checkout-display'>
-                    <form>
-                        <h3>Total: ${total}</h3>
+                    <form className='checkout-form'>
+                        <h3>Order Total: ${total}</h3>
+                        <div className="email-box">
+                            <label>Email:</label>
+                            <input type='text' defaultValue={email} name='email' required onChange={handleEmailChange} />
+                            <label>Confirm Email:</label>
+                            <input type='text' name='confirmation-email' required onChange={handleEmailChange} />
+                        </div>
                         <div className="checkout-address">
                             <h4 className='checkout-form-title'>Shipping Address</h4>
                             <CheckoutAddressForm address={shippingAddressInfo} handleAddressChange={handleShippingAddressChange} />
                         </div>
                         <div className="billing-info">
                             <h4 className='checkout-form-title'>Billing Information</h4>
-                            <BillingForm paymentInfo={paymentInfo} handlePaymentChange={handlePaymentChange}/>
+                            <BillingForm paymentInfo={paymentInfo} handlePaymentChange={handlePaymentChange} />
                         </div>
                         <div className='checkout-address'>
                             <h4 className='checkout-form-title'>Billing Address</h4>
                             <CheckoutBillingAddressForm address={shippingAddressInfo} useShipping={useShippingAddress} handleAddressChange={handleBillingAddressChange} />
                         </div>
-                        <button className="checkout-button" onClick={onOrder} type='submit' >Checkout</button>
+                        <div className='complete-checkout'>
+                            <button className="checkout-button" onClick={onOrder} type='submit' >Checkout</button>
+                        </div>
                     </form>
                 </div>
             </>

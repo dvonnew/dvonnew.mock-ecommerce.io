@@ -16,7 +16,7 @@ const Cart = (props) => {
         )
     } else {
         return (
-            <div>
+            <>
                 <h1>Cart</h1>
                 <div className='shop-cart'>
                     {cart.map((item) => (
@@ -26,7 +26,7 @@ const Cart = (props) => {
                 <Link to='checkout'>
                     <button className='check-out-button' >Check Out</button>
                 </Link>
-            </div>
+            </>
     )
     }
 }

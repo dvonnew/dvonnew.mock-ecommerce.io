@@ -2,6 +2,19 @@
   text-align: center;
 }
 
+body {
+ height:100%;
+ overflow: visible;
+ display: flex;
+ flex-direction: column;
+}
+
+.body{
+  height:100%;
+  display: flex;
+  flex-direction: column;
+}
+
 nav {
   display: flex;
   justify-content: space-around;
@@ -39,6 +52,8 @@ p{
 
 .shopBody {
   padding: 5%;
+  display: block;
+  overflow: visible;
 }
 
 .image-slider{
@@ -140,9 +155,22 @@ li:hover{
   height: 1500px;
   width: 95%;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  gap: 1rem;
 }
+
+@media (min-width: 450px) {
+  .item-list { grid-template-columns: repeat(2, 1fr);}
+}
+
+@media (min-width: 700px) {
+  .item-list { grid-template-columns: repeat(3, 1fr);}
+}
+
+@media (min-width: 1000px) {
+  .item-list { grid-template-columns: repeat(4, 1fr);}
+}
+
+
 
 .item-detail{
   display: flex;
@@ -252,6 +280,7 @@ button{
   width: 300px;
   display: flex;
   flex-direction: column;
+  overflow: scroll;
 }
 
 
@@ -289,38 +318,94 @@ button{
   border-radius: 5px;
   box-shadow: .5px grey;
 }
+
 .add-address, .add-payment{
   height: 70px;
   width: 70px;
 }
 
 .checkout-display {
-  height: 1200px;
+  height: 100%;
+  min-width: 75%;
+  max-width: 85%;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  overflow: visible;
+  padding: 2%;
 }
 
-.checkout-address {
-  height: 300px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-}
-
-.billing-info {
-  height: 300px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
+.checkout-form {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(60%, 80%);
+  grid-template-rows: .5 1.5fr 2fr 2fr 2fr 1.5fr;
 }
 
 .checkout-form-title {
   margin-top: 5px;
+  height:25%
+}
+
+.checkout-address {
+  max-height: 100%;
+  min-height: 75%;
+  min-width: 75%;
+  display: grid;
+  grid-template-rows: .25fr 3fr;
+  grid-template-columns: 100%;
+}
+
+.billing-info {
+  height: 100%;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.checkout-address-form, .checkout-payment-form{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: visible;
+  margin-bottom: 1%;
+}
+
+.name-input, .street-input, .apt-input, .city-input, .zipcode-input {
+  width: 100%;
+}
+
+.state-input{
+  max-width: 50%;
+  min-width: 25%;
+}
+
+.email-box{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .billing-address-check {
   display: flex;
   align-items: center;
+  justify-content: start;
+}
+
+.same-as-shipping-text{
+  margin: 0;
+}
+
+.complete-checkout {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.checkout-button {
+  height: 100%;
+  margin: 2%;
 }
 

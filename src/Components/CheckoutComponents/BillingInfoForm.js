@@ -6,7 +6,7 @@ const BillingForm = (props) =>{
     
     if (paymentInfo.primary === false) {
         return (
-            <form className="payment-form">
+            <div className="checkout-payment-form">
                 <p>* indicated required items</p>
                 <label>* Name on Card:</label>
                 <input className="name-input" name='name' type='text' required onChange={props.handlePaymentChange} />
@@ -21,7 +21,7 @@ const BillingForm = (props) =>{
                 <input className='cvv-input' name='cvv' type='text' required minLength={3} maxLength={3} onChange={props.handlePaymentChange} />
                 <label>* Zipcode:</label>
                 <input className='zipcode-input' name='zipcode' type='text' required minLength={5} maxLength={5} onChange={props.handlePaymentChange} />
-            </form>
+            </div>
         )
     } else {
         return (

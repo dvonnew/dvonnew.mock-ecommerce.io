@@ -94,7 +94,7 @@ const App = () => {
     return(
         <>
             <Router>
-                <div>
+                <div className='body'>
                     <Nav signIn={signIn} signOut={signOut} user={user}/>
                     <div className='shopBody'>
                     <Routes>
