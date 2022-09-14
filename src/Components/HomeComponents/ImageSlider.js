@@ -1,21 +1,23 @@
 import React, { useState, useEffect } from "react";
 import AliceCarousel from "react-alice-carousel";
 import 'react-alice-carousel/lib/alice-carousel.css'
+import { ProgressPlugin } from "webpack";
 import ItemImage from "./ItemImage";
 
 
-const ImagesSlider = () => {
+const ImagesSlider = (props) => {
+
+
+    const { items } = props
 
     useEffect(() => {
-        fetchItems()
+        grabSliderItems()
     }, [])
 
-    const [items, setItems] = useState([])
+    const [sliderItems, setItems] = useState([])
 
-    const fetchItems = async () => {
-        const data = await fetch("https://fakestoreapi.com/products")
-
-        const items = await data.json()
+    const grabSliderItems = () => {
+        
         items.sort(function (a,b) {
             return a.rating.rate - b.rating.rate
         })
@@ -25,7 +27,7 @@ const ImagesSlider = () => {
     return (
         <div className='image-slider'>
             <AliceCarousel autoPlay auto autoPlayInterval="3000" infinite={true}>
-                {items.map(item=> (
+                {sliderItems.map(item=> (
                     <ItemImage item={item} key={item.id}/>
                 ))}
             </AliceCarousel>

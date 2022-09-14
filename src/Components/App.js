@@ -19,12 +19,24 @@ const App = () => {
 
     const [user, login, error] = useAuthState(auth)
     const [cart, setCart] = useState([])
+    const [items, setItems] = useState([])
 
+    useEffect(() => {
+        fetchItems()
+    }, [])
+    
     useEffect(() => {
         if (!user) return
         getCart()
     }, [user])
 
+    //items fetch
+    const fetchItems = async () => {
+        const data = await fetch("https://serene-chamber-57819.herokuapp.com/https://fakestoreapi.com/products")
+
+        const itemsQuery = await data.json()
+        setItems(itemsQuery)
+    }
 
     //Cart Related
 
@@ -98,8 +110,8 @@ const App = () => {
                     <Nav signIn={signIn} signOut={signOut} user={user}/>
                     <div className='shopBody'>
                     <Routes>
-                        <Route path="/" exact element={<Home />} />
-                        <Route path="/shop" exact element={<Shop />} />
+                        <Route path="/" exact element={<Home items={items}/>} />
+                        <Route path="/shop" exact element={<Shop items={items} />} />
                         <Route path="/cart"  element={<Cart cart={cart} user={user} deleteItem={deleteItem} onQuantityChange={onQuantityChange} />} />
                         <Route path="/shop/:id" element={<Item addToCart={addToCart} />} />
                         <Route path="/profile" element={<Profile user={user}/>} />

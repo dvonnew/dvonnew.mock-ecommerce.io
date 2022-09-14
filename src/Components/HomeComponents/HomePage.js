@@ -1,11 +1,13 @@
 import React from "react";
 import ImagesSlider from "./ImageSlider";
 
-const Home = () => {
+const Home = (props) => {
+
+    const { items } = props
 
     return (
         <div className='home'>
-            <ImagesSlider />
+            <ImagesSlider items={items} />
         </div>
     )
 }
