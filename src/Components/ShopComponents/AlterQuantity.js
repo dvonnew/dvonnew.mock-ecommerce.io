@@ -12,7 +12,7 @@ const AlterQuantity = (props) => {
     return(
         <div className='buy-box'>
                 <label>Quantity: </label>
-                <input type='number' defaultValue={quantity} onChange={onChange}/>
+                <input type='number' defaultValue={quantity} onChange={onChange} min='0' />
         </div>
     )
 }

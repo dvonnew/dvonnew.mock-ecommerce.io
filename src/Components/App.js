@@ -113,7 +113,7 @@ const App = () => {
                         <Route path="/" exact element={<Home items={items}/>} />
                         <Route path="/shop" exact element={<Shop items={items} />} />
                         <Route path="/cart"  element={<Cart cart={cart} user={user} deleteItem={deleteItem} onQuantityChange={onQuantityChange} />} />
-                        <Route path="/shop/:id" element={<Item addToCart={addToCart} />} />
+                        <Route path="/shop/:id" element={<Item items={items} addToCart={addToCart} />} />
                         <Route path="/profile" element={<Profile user={user}/>} />
                         <Route path="/cart/checkout" element={<CheckoutPage user={user} cart={cart} clearCart={clearCart} />}/>
                     </Routes>

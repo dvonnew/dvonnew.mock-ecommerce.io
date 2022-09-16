@@ -9,18 +9,18 @@ const BillingForm = (props) =>{
             <div className="checkout-payment-form">
                 <p>* indicated required items</p>
                 <label>* Name on Card:</label>
-                <input className="name-input" name='name' type='text' required onChange={props.handlePaymentChange} />
+                <input className="name-input" name='name' type='text' required onChange={props.handlePaymentChange} onBlur={props.check}/>
                 <label>* Number:</label>
-                <input className='number-input' name='number' type='text' required minLength={8} maxLength={19} onChange={props.handlePaymentChange} />
+                <input className='number-input' name='number' type='text' required minLength={8} maxLength={19} onChange={props.handlePaymentChange} onBlur={props.check}/>
                 <div className='exp'>
                     <label>*Expiration Date (Mon/Year):</label>
-                    <input className='month-input' name='month' type='text' required minLength={1} maxLength={2} onChange={props.handlePaymentChange}/>
-                    <input className='year-input' name='year' type='text' required minLength={4} maxLength={4} onChange={props.handlePaymentChange} />
+                    <input className='month-input' name='month' type='text' required minLength={1} maxLength={2} onChange={props.handlePaymentChange} onBlur={props.check}/>
+                    <input className='year-input' name='year' type='text' required minLength={4} maxLength={4} onChange={props.handlePaymentChange} onBlur={props.check}/>
                 </div>
                 <label>* CVV:</label>
-                <input className='cvv-input' name='cvv' type='text' required minLength={3} maxLength={3} onChange={props.handlePaymentChange} />
+                <input className='cvv-input' name='cvv' type='text' required minLength={3} maxLength={3} onChange={props.handlePaymentChange} onBlur={props.check}/>
                 <label>* Zipcode:</label>
-                <input className='zipcode-input' name='zipcode' type='text' required minLength={5} maxLength={5} onChange={props.handlePaymentChange} />
+                <input className='zipcode-input' name='zipcode' type='text' required minLength={5} maxLength={5} onChange={props.handlePaymentChange} onBlur={props.check}/>
             </div>
         )
     } else {
