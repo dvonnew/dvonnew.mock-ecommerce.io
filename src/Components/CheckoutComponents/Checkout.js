@@ -88,8 +88,10 @@ const CheckoutPage = (props) => {
     })
 
     useEffect(()=> {
-        allowSubmit()
-    })
+        if (Object.values(isFormValid).every(value => value === true)){
+            setDisabled(false)
+        }
+    }, [isFormValid])
 
 
     const getUserInfo = async () => {
@@ -106,18 +108,7 @@ const CheckoutPage = (props) => {
     }
 
     const allowSubmit = () => {
-        let trues = 0
-        Object.values(isFormValid).forEach((value) => {
-            if (value === true) {
-                trues += 1 
-            }
-            console.log(trues)
-        })
-        if (trues === 4) {
-            setDisabled(false)
-        } else {
-            return
-        }
+        Object.values(isFormValid).every(value => value === true)
     }
 
     // Email related

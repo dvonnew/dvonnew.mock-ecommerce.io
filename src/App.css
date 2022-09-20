@@ -51,6 +51,7 @@ p{
 }
 
 .shopBody {
+  height: 100%;
   padding: 5%;
   display: block;
   overflow: visible;
@@ -58,10 +59,17 @@ p{
 
 .image-slider{
   width: 100%;
-  height: 400px;
+  height: 100%;
   padding-top: 5px;
   display: flex;
   justify-content: center;
+}
+
+@media (min-height: 300px) {
+  .image-slider{ height: 75%;}
+}
+@media (min-height: 500px) {
+  .image-slider { height: 100%;}
 }
 
 .alice-carousel{
@@ -70,17 +78,21 @@ p{
 
 .alice-carousel__wrapper{
   width: 100%;
+  height: 80%;
   display: flex;
   justify-content: center;
 }
 
 .__alice-carousel__stage-item{
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: flex-start;
+  
 }
 
 .home-image{
-  height: 500px;
+  height: 75%;
   width: 400px;
   position: relative;
   display:flex;
@@ -89,20 +101,43 @@ p{
   z-index: 0;
 }
 
+@media (min-width: 400px) {
+  .home-image { width: 200px;}
+}
+
+@media (min-width: 600px){
+  .home-image { width: 400px;}
+}
+
+@media (min-height: 300px) {
+  .home-image { height: 200px;}
+}
+
+@media (min-height: 700px) {
+  .home-image { height: 500px;}
+}
+
 .home-image-title{
-  width: 100%;
-  height: 5%;
+  width: 110%;
+  height: 20%;
   font-size: 18px;
   margin-bottom: 5px;
   z-index: 10;
+  background-color: rgb(233, 233, 233);
+  position: absolute;
+  opacity: 70%;
 
 }
 
 .sliderimg{
   width: 100%;
-  height: 95%;
+  height: 100%;
   object-fit: contain;
   flex-direction: row;
+}
+
+.alice-carousel_dots,  .alice-carousel_prev-btn, .alice-carousel_next-btn{
+  position: relative;
 }
 
 a{
