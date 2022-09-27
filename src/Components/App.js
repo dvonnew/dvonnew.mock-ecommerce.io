@@ -7,11 +7,13 @@ import Cart from './CartComponents/ShoppingCart'
 import Item from './ShopComponents/ItemPage'
 import Profile from './UserProfileComponents/Profile'
 import CheckoutPage from './CheckoutComponents/Checkout'
+import Orders from './OrdersComponents/Orders'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { signIn, signOutUser } from '../Firebase/firebaseUser'
 import { saveCart, getUserCart, deleteCartItem } from '../Firebase/firebaseCart'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth } from '../Firebase/firebase-config'
+
 
 
 const App = () => {
@@ -115,6 +117,7 @@ const App = () => {
                         <Route path="/cart"  element={<Cart cart={cart} user={user} deleteItem={deleteItem} onQuantityChange={onQuantityChange} />} />
                         <Route path="/shop/:id" element={<Item items={items} addToCart={addToCart} />} />
                         <Route path="/profile" element={<Profile user={user}/>} />
+                        <Route path="/orders" element={<Orders user={user} />} />
                         <Route path="/cart/checkout" element={<CheckoutPage user={user} cart={cart} clearCart={clearCart} />}/>
                     </Routes>
                     </div>

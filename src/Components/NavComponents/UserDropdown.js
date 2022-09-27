@@ -52,15 +52,17 @@ const DropDown = (props) => {
   
     return (
         <>
-            <div className='dropdown' onMouseOver={handleHover} >
-                <div>
-                    <p className='dropdown' onMouseOver={handleHover}>Account</p>
+            <div className='dropdown' >
+                <div onMouseOver={handleHover}>
+                    <p className='dropdown'>Account</p>
                 </div>
-                <ul style={style} className='dropdown-content' onMouseOut={handleOut}>
+                <ul style={style} className='dropdown-content' onMouseOver={handleHover} onMouseOut={handleOut}>
                     <Link style={linkStyle} to='/profile'>
                         <li style={logout}>Profile</li>
                     </Link>
-                    <li style={logout}>Orders</li>
+                    <Link style={linkStyle} to='/orders'>
+                        <li style={logout}>Orders</li>
+                    </Link>
                     <button className="log-button" style={login} onClick={onLogin}>Login</button>
                     <button className="log-button" style={logout} onClick={onLogout}>Logout</button>
                 </ul>

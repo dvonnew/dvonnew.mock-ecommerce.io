@@ -118,10 +118,10 @@ p{
 }
 
 .home-image-title{
-  width: 110%;
+  max-width: 110%;
   height: 20%;
   font-size: 18px;
-  margin-bottom: 5px;
+  margin: 0;
   z-index: 10;
   background-color: rgb(233, 233, 233);
   position: absolute;
@@ -168,7 +168,7 @@ li:hover{
 
 .item-card{
   height: 250px;
-  width: 200px;
+  max-width: 200px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -177,18 +177,18 @@ li:hover{
 
 .item-image{
   height: 150px;
-  width: 100px;
+  max-width: 100px;
   object-fit: contain;
 }
 
 .item-image:hover{
   height: 250px;
-  width: 200px;
+  max-width: 200px;
 }
 
 .item-list{
   height: 1500px;
-  width: 95%;
+  max-width: 95%;
   display: grid;
   gap: 1rem;
 }
@@ -262,7 +262,7 @@ button{
 
 .cart-card{
   height: 250px;
-  width: 400px;
+  max-width: 400px;
   display: flex;
   flex-direction: row;
   border: .5px solid grey;
@@ -273,17 +273,17 @@ button{
   display: flex;
   flex-direction: column;
   height: 100%;
-  width: 50%;
+  max-width: 50%;
 }
 
 .cart-item-image{
   height: 100px;
-  width: 100px;
+  max-width: 100px;
 }
 
 .cart-detail{
   height: 100%;
-  width: 50%;
+  max-width: 50%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -296,14 +296,14 @@ button{
 
 .address-box, .payment-info-box, .order-history{
   height: 300px;
-  width: 100%;
+  max-width: 100%;
   display: flex;
   flex-direction: column;
 }
 
 .address-display-box, .payment-info-display-box {
   height: 200px;
-  width: 75%;
+  max-width: 75%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -312,7 +312,7 @@ button{
 
 .address-form, .payment-form{
   height: 275px;
-  width: 300px;
+  max-width: 300px;
   display: flex;
   flex-direction: column;
   overflow: scroll;
@@ -325,7 +325,7 @@ button{
   align-items: space-evenly;
   padding: 5px;
   height: 175px;
-  width: 175px;
+  max-width: 175px;
   border: 0.5px solid grey;
   border-radius: 5px;
   box-shadow: .5px grey;
@@ -337,7 +337,7 @@ button{
   align-items: space-evenly;
   padding: 5px;
   height: 175px;
-  width: 175px;
+  max-width: 175px;
   border: 1px solid rgb(38, 186, 1);
   border-radius: 5px;
   box-shadow: .5px grey;
@@ -348,7 +348,7 @@ button{
   justify-content: center;
   align-items: center;
   height: 175px;
-  width: 175px;
+  max-width: 175px;
   border: 0.5px solid grey;
   border-radius: 5px;
   box-shadow: .5px grey;
@@ -356,7 +356,7 @@ button{
 
 .add-address, .add-payment{
   height: 70px;
-  width: 70px;
+  max-width: 70px;
 }
 
 .checkout-display {
@@ -371,7 +371,7 @@ button{
 
 .checkout-form {
   height: 100%;
-  width: 100%;
+  max-width: 100%;
   display: grid;
   grid-template-columns: minmax(60%, 80%);
   grid-template-rows: .5 1.5fr 2fr 2fr 2fr 1.5fr;
@@ -393,7 +393,7 @@ button{
 
 .billing-info {
   height: 100%;
-  width: 90%;
+  max-width: 90%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -409,7 +409,7 @@ button{
 }
 
 .name-input, .street-input, .apt-input, .city-input, .zipcode-input {
-  width: 100%;
+  max-width: 100%;
 }
 
 .state-input{

@@ -9,19 +9,19 @@ const ImagesSlider = (props) => {
 
 
     const { items } = props
+    const [sliderItems, setSliderItems] = useState([])
 
-    useEffect(() => {
-        grabSliderItems()
+    useEffect(()=> {
+        sortSliderItems()
     }, [])
 
-    const [sliderItems, setItems] = useState([])
+    const sortSliderItems = () => {
+        let dummyList = [...items]
 
-    const grabSliderItems = () => {
-        
-        items.sort(function (a,b) {
-            return a.rating.rate - b.rating.rate
-        })
-        setItems(items.slice(0,5))
+        dummyList.sort((function(a,b) { 
+            return b.rating.rate - a.rating.rate
+        }))
+        setSliderItems(dummyList.slice(0,5))
     }
 
     return (
