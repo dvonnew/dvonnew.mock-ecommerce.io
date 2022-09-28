@@ -5,11 +5,7 @@ import {
     collection,
     where,
     addDoc,
-    updateDoc,
-    doc,
-    getDoc,
-    setDoc
- } from "firebase/firestore"
+} from "firebase/firestore"
 import {
     onAuthStateChanged,
     GoogleAuthProvider,

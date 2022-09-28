@@ -1,4 +1,4 @@
-import { db, auth } from './firebase-config'
+import { db } from './firebase-config'
 import { isUserSignedIn } from './firebaseUser'
 import {
     query,
@@ -8,8 +8,6 @@ import {
     addDoc,
     updateDoc,
     doc,
-    getDoc,
-    setDoc,
     Timestamp,
     deleteDoc
 } from "firebase/firestore"
