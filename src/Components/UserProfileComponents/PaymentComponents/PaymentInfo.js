@@ -25,7 +25,7 @@ const PaymentInfo = (props) => {
     }
 
     const onClick = () => {
-        setFrom({display:'block'})
+        setFrom({display:'grid'})
     }
 
     const onCancel = () => {

@@ -25,7 +25,7 @@ const Address = (props) => {
     }
 
     const onClick = () => {
-        setForm({display: "block"})
+        setForm({display: "grid"})
     }
 
     const onCancel = () => {

@@ -11,7 +11,7 @@ const DropDown = (props) => {
 
     const linkStyle = {
         color: 'black',
-        'text-decoration': 'none'
+        textDecoration: 'none'
     }
     
     useEffect(() => {
@@ -19,7 +19,7 @@ const DropDown = (props) => {
     }, [user])
 
     const handleHover = (e) => {
-        setStyle({display: 'block',})
+        setStyle({display: 'flex',})
     }
 
     const handleOut = (e) => {
@@ -52,20 +52,20 @@ const DropDown = (props) => {
   
     return (
         <>
-            <div className='dropdown' >
-                <div onMouseOver={handleHover}>
-                    <p className='dropdown'>Account</p>
+            <div className='dropdown' onMouseOver={handleHover} onMouseOut={handleOut}>
+                <li className='dropdown'>Account</li>
+                <div className='dropdown-container' style={style} onMouseOut={handleOut}>
+                    <ul className='dropdown-content' >
+                        <Link style={linkStyle} to='/profile'>
+                            <li style={logout}>Profile</li>
+                        </Link>
+                        <Link style={linkStyle} to='/orders'>
+                            <li style={logout}>Orders</li>
+                        </Link>
+                        <button className="log-button" style={login} onClick={onLogin}>Login</button>
+                        <button className="log-button" style={logout} onClick={onLogout}>Logout</button>
+                    </ul>
                 </div>
-                <ul style={style} className='dropdown-content' onMouseOver={handleHover} onMouseOut={handleOut}>
-                    <Link style={linkStyle} to='/profile'>
-                        <li style={logout}>Profile</li>
-                    </Link>
-                    <Link style={linkStyle} to='/orders'>
-                        <li style={logout}>Orders</li>
-                    </Link>
-                    <button className="log-button" style={login} onClick={onLogin}>Login</button>
-                    <button className="log-button" style={logout} onClick={onLogout}>Logout</button>
-                </ul>
             </div>
         </>
     )

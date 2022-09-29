@@ -21,7 +21,7 @@ const AlterCartQuantity = (props) => {
     return(
         <div className='buy-box'>
                 <label>Quantity: </label>
-                <input type='number' defaultValue={quantity} onChange={onChange}/>
+                <input type='number' className='cart-quantity' defaultValue={quantity} onChange={onChange}/>
                 <button className='save-btn' style={style} onClick={onSave}>Save</button>
         </div>
     )

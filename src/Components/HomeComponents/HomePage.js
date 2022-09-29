@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ImagesSlider from "./ImageSlider";
 
 const Home = (props) => {
 
-    const { items } = props
+    const { sliderItems } = props
+
+    // useEffect(() => {
+    //     props.fetchItems()
+    // }, [])
 
     return (
         <div className='home'>
-            <ImagesSlider items={items} />
+            <ImagesSlider sliderItems={sliderItems} />
         </div>
     )
 }

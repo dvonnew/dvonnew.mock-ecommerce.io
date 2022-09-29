@@ -4,23 +4,29 @@ import 'react-alice-carousel/lib/alice-carousel.css'
 import ItemImage from "./ItemImage";
 
 
-const ImagesSlider = (props) => {
+const ImagesSlider = () => {
 
 
-    const { items } = props
     const [sliderItems, setSliderItems] = useState([])
 
-    useEffect(()=> {
-        sortSliderItems()
-    }, [])
+    useEffect(() => {
+        fetchItems()
+    })
 
-    const sortSliderItems = () => {
-        let dummyList = [...items]
+    const fetchItems = async () => {
+        try {
+            const data = await fetch("https://serene-chamber-57819.herokuapp.com/https://fakestoreapi.com/products")
 
-        dummyList.sort((function(a,b) { 
-            return b.rating.rate - a.rating.rate
-        }))
-        setSliderItems(dummyList.slice(0,5))
+            const itemsQuery = await data.json()
+
+
+            itemsQuery.sort((function(a,b) { 
+                return b.rating.rate - a.rating.rate
+            }))
+            setSliderItems(itemsQuery.slice(0,5))
+        } catch(err) {
+            console.error(err)
+        }
     }
 
     return (

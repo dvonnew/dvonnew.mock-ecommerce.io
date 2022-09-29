@@ -20,7 +20,7 @@ const CartCard = (props) => {
             <div className="cart-description">
                 <p>{item.item.title}</p>
                 <div className='cart-item-image'>
-                    <img src={item.item.image} alt={item.item.title} className='item-image'></img>
+                    <img src={item.item.image} alt={item.item.title} className='cart-image'/>
                 </div>
             </div>
             <div className='cart-detail'>

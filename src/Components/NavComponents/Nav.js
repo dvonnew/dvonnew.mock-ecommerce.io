@@ -22,9 +22,7 @@ const Nav = (props) => {
                 <Link style={navStyle} to='/cart'>
                     <li>Cart</li>
                 </Link>
-                <li>
-                    <DropDown signIn={props.signIn} signOut={props.signOut} user={user}/>
-                </li>
+                <DropDown signIn={props.signIn} signOut={props.signOut} user={user}/>
             </ul>
         </nav>
     )
