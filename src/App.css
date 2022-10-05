@@ -24,7 +24,7 @@ nav {
   grid-template-columns: repeat(4, 1fr);
   grid-column-gap: 30px;
   list-style: none;
-  justify-self: right;
+  justify-self: center;
 }
 
 li {
@@ -44,11 +44,10 @@ li {
 }
 
 .dropdown-container{
-  position: relative;
+  position: absolute;
 }
 
 .dropdown-content {
-  width: 100%;
   background-color: #f9f9f9;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
@@ -85,11 +84,11 @@ p{
   justify-content: center;
 }
 
-@media (min-height: 300px) {
-  .image-slider{ height: 75%;}
+@media (min-height: 400px) {
+  .image-slider{ height: 400px;}
 }
-@media (min-height: 500px) {
-  .image-slider { height: 100%;}
+@media (min-height: 600px) {
+  .image-slider { height: 600px;}
 }
 
 .alice-carousel{
@@ -101,24 +100,25 @@ p{
   height: 80%;
   display: flex;
   justify-content: center;
+  position: relative;
 }
 
 .__alice-carousel__stage-item{
+  width: 80%;
+  height: 100%;
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   
 }
 
 .home-image{
-  height: 75%;
-  width: 400px;
-  position: relative;
+  height: 100%;
   display:flex;
   flex-direction: column;
   align-items: center;
   z-index: 0;
+
 }
 
 @media (min-width: 400px) {
@@ -138,7 +138,7 @@ p{
 }
 
 .home-image-title{
-  max-width: 110%;
+  max-width: 90%;
   height: 20%;
   font-size: 18px;
   margin: 0;
@@ -153,7 +153,6 @@ p{
   width: 100%;
   height: 100%;
   object-fit: contain;
-  flex-direction: row;
 }
 
 .alice-carousel_dots,  .alice-carousel_prev-btn, .alice-carousel_next-btn{
